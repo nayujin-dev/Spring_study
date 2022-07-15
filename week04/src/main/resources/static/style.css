@@ -47,6 +47,7 @@ body {
     text-align: left;
     color: #E8344E;
 }
+
 .search-itemDto-center span.unit {
     width: 17px;
     height: 18px;
@@ -123,6 +124,7 @@ button {
     letter-spacing: -1.1px;
     color: #000000;
 }
+
 .popup input {
     width: 330px;
     height: 39px;
