@@ -1,11 +1,12 @@
 package com.sparta.week04.service;
-
-import com.sparta.week04.domain.Product;
-import com.sparta.week04.domain.ProductMypriceRequestDto;
-import com.sparta.week04.domain.ProductRepository;
+import com.sparta.week04.repository.ItemDto;
+import com.sparta.week04.repository.Product;
+import com.sparta.week04.repository.ProductMypriceRequestDto;
+import com.sparta.week04.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import javax.transaction.Transactional;
 
 @RequiredArgsConstructor // final로 선언된 멤버 변수를 자동으로 생성합니다.
 @Service // 서비스임을 선언합니다.
@@ -15,8 +16,20 @@ public class ProductService {
     public Long update(Long id, ProductMypriceRequestDto requestDto) {
         Product product = productRepository.findById(id).orElseThrow(
                 () -> new NullPointerException("해당 아이디가 존재하지 않습니다.")
+
         );
         product.update(requestDto);
         return id;
     }
+
+
+    @Transactional // 메소드 동작이 SQL 쿼리문임을 선언합니다.
+    public Long updateBySearch(Long id, ItemDto itemDto) {
+        Product product = productRepository.findById(id).orElseThrow(
+                () -> new NullPointerException("해당 아이디가 존재하지 않습니다.")
+        );
+        product.updateByItemDto(itemDto);
+        return id;
+    }
+
 }
